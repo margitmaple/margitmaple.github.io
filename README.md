@@ -38,7 +38,7 @@ the parameter weights.
 Ridge regularization implements a cost function that minimizes the square error and the L2 norm. The alpha coefficient determines how heavily weighted the L2 norm is in the cost function. Alpha values ranging from 1 to 20 are tested, with alpha = 10 being selected as it results in the lowest RMSE in the test dataset (Figure 2). With this alpha value, the RMSE is 0.1582 m. The kfolds cross-validation technique was also implemented. The number of folds was tested from 2 to 30. The overall test RMSE tended to decrease until 9 folds, after which it leveled out (Figure 2). With lower fold numbers, a larger portion of the dataset is used as the hold-out. With our relatively small dataset, the decrease in in samples due to the hold-out appears to be more detrimental to model performance than the improvements associated cross-validation.
 
 With an alpha value of 10 and cross-validation using 9 folds, the linear regression model with ridge regularization has a RMSE of 0.1567m when applied to the test data.
-![](assets/IMG/RR_alpha.png)
+![](assets/IMG/RR_alpha_kf.png)
 
 *Figure 2: Linear regression with ridge regularization, RMSE with respect to alpha.*
 
