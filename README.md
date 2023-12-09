@@ -10,10 +10,16 @@ Although many analytical and numerical models have been used to explore these in
 
 This work aims to fill the gaps left by previous studies and assess the ability of supervised machine learning techniques to predict groundwater levels. Groundwater measurements and topographic surveys were conducted in the winter of 2014-2015 at Imperial Beach, CA. Along with publicly availble data of offshore conditions, this allows for the developement of an ensemble machine learning approach.
 
-Historical and forecasted off-shore wave conditions are publicly availible through the Coastal Data Information Program (CDIP, https://cdip.ucsd.edu/), and water level data is availible through the National Oceanic and Atmospheric Administration (NOAA, https://tidesandcurrents.noaa.gov/)
 ## Data
+Input data features selected for this project are time (t), offshore water level (WL), deep water significant wave height (HSo), peak period (TP), peak direction (DP), foreshore beach slope (b). Off-shore wave conditions (HSo, Tp, and DP) at 30 minute intervals are publicly availible through the Coastal Data Information Program's (CDIP, https://cdip.ucsd.edu/) nearest deep water wave buoy (Point Loma South, 191). Water levels at 6 minute intervals are availible through the National Oceanic and Atmospheric Administration's (NOAA, https://tidesandcurrents.noaa.gov/) nearest open coast tide gauge (La Jolla, 9410230). 
 
-Here is an overview of the dataset, how it was obtained and the preprocessing steps taken, with some plots!
+Beach topography is taken from an ATV survey conducted February 18th, 2015. Foreshore beach slope varies as water levels move up and down the beach with tides and waves, as the beach face is convex. Therefore, an emperical parameterization of mean water level and wave runup presented by Stockdon et al., 2006 is used to determine the region over which the foreshore beach slope is recorded:
+
+$`bound = 1.1\bigg(0.35b(H_{S0}L_0)^{\frac{1}{2}}\pm\dfrac{[H_{S0}L_0(0.563b^2+0.004)]^{\frac{1}{2}}}{2}\bigg) + WL`$
+
+$`b=\dfrac{y(bound_{upper}) - y(bound_{lower})}{x_(bound{upper}) - x(bound_{lower})}`$
+
+The groundwater head measured at the pressure sensor shown in Figure XXX is taken to be the target data. All input and targer data is interpolated to match the lowest sample rate of 30 minutes in the CDIP data, and normalized to range from 0 to 1.
 
 ![](assets/IMG/datapenguin.png){: width="500" }
 
