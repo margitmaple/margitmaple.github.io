@@ -28,6 +28,13 @@ The groundwater head measured at a pressure sensor buried 30m inland from the sh
 
 
 ## Modelling
+### Feature and Model Selection
+In addition to the variables discussed in the previous section, an additional variable calculated as $H_{so}^{1/2}*Tp$ is also included. This value is often used in parameterizations of wave runup on beaches and therefore may play an important role. Additionally, groundwater response lags behind ocean conditions increasingly as you move inland. Analysis of the measured groundwater head found that the water tables at this location typically peaked around 4 hours after the high tide. In order to capture these delayed effects, values of input variable up to 6 hours (12 timesteps) earlier are added as their own feature (except for t). The first 12 data points are therefore removed from the dataset. In total, this lead to a feature set of length $(7 * 13+1) = 96$ features and m = 1284 samples. An ensemble approach using supermized methods is taken by applying linear regression with ridge regularization, decision tress within a random forest regressor, and an artificial neural network. This is done in order to effectively capture both linear and non-linear relationships in the time series. For all models, 70% of the samples are used as the training dataset, and 30% are used as the test data set.
+
+### Linear Regression with ridge regularization
+A linear regression with ridge regularization is implemente using the Ridge function in the SciKitLearn toolbox. This is ment as a first approach to capture any linear relationships in the time series. Ridge regularization is used in order to combat overfitting. Many of the features added as past values of the original variables may not have a strong correlation to the target, as only those features within the timeframe where the forcing has propogated to the measurement location will influence it strongly. Therefore, including a regularization term is crucial for minimizing 
+the parameter weights.
+
 
 Here are some more details about the machine learning approach, and why this was deemed appropriate for the dataset. 
 
