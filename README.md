@@ -45,11 +45,20 @@ In order to combine the results of the two models, the average of the predicted 
 
 ## Results
 *Table 1: Root mean squared errors of the various models when estimating the test data.*
+
 | Model    | Ridge Regularization | Ridge Regularization w/ K Folds | Random Forest | Ensemble Average |
+| -------- | -------------------- | ------------------------------- | ------------- | ---------------- |
 | RMSE (m) |         0.1580       |             0.1578              |    0.2574     |      0.1351      |
 
 
-Table 1 shows the RMSE of all the models when applied to the test data. The kfolds cross-validation did not significantly change model performance (RMSE change of <1mm). The linear models with ridge regularization have significanly lower RMSEs that the Random Forest model. Taking the ensemble average decreased RMSE by 0.0227 when compared to the best original model.
+Table 1 shows the RMSE of all the models when applied to the test data. The kfolds cross-validation did not significantly change model performance (RMSE change of <1mm). The linear models with ridge regularization have significanly lower RMSEs that the Random Forest model. Taking the ensemble average decreased RMSE by 0.0227 when compared to the best original model. Figure 2 shows the comparison and residuals between the predicted and measured groundwater heads. The mean of the residuals using the ensemble average was very close to zero (0.004). The distribution of the residuals is slightly right-skewed, suggesting it is not gaussian.
+
+
+![](assets/IMG/results_scatter.png)
+*Figure 2: Predicted vs measured groundwater heads from test dataset are shown on the left. A histogram of the residuals using the ensable average approach are shown on the right. The black dashed line represents the mean residual value.*
+
+![](assets/IMG/results_tseries.png)
+*Figure 3: Predicted groundwater heads from the test data set are plotted with all measured groundwater (shown in black).*
 
 
 
