@@ -1,6 +1,6 @@
 ## Machine Learning Models to Predict Beach Groundwater Head Elevation at Imperial Beach, CA
 In order to predict beach groundwater hydraulic head, an ensemble machine learning approach is applied using linear regression with ridge regularization and random forest decision trees. 
-***
+
 
 ## Links
 Code: https://colab.research.google.com/drive/1dlk3SE7zYaYOlahEPSb_FWe1lZSBwSi-?usp=sharing
