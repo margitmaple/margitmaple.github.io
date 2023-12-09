@@ -51,7 +51,7 @@ In order to combine the results of the two models, the average of the predicted 
 | RMSE (m) |         0.1580       |             0.1578              |    0.2574     |      0.1351      |
 
 
-Table 1 shows the RMSE of all the models when applied to the test data. The kfolds cross-validation did not significantly change model performance (RMSE change of <1mm). The linear models with ridge regularization have significanly lower RMSEs that the Random Forest model. Taking the ensemble average decreased RMSE by 0.0227 when compared to the best original model. Figure 2 shows the comparison and residuals between the predicted and measured groundwater heads. The mean of the residuals using the ensemble average was very close to zero (0.004). The distribution of the residuals is slightly right-skewed, suggesting it is not gaussian. Figure 3 shows the predicted groundwater levels from the test set ploted as a function of time. This allows for a qualitative assessment of the model's ability to reproduce groundwater oscillation patterns.
+Table 1 shows the RMSE of all the models when applied to the test data. The kfolds cross-validation did not significantly change model performance (RMSE change of <1mm). The linear models with ridge regularization (LR) have significanly lower RMSEs that the Random Forest model (RF). Taking the ensemble average decreased RMSE by 0.0227 when compared to the best original model. Figure 2 shows the comparison and residuals between the predicted and measured groundwater heads. The mean of the residuals using the ensemble average was very close to zero (0.004). The distribution of the residuals is slightly right-skewed, suggesting it is not gaussian. Figure 3 shows the predicted groundwater levels from the test set ploted as a function of time. This allows for a qualitative assessment of the model's ability to reproduce groundwater oscillation patterns.
 
 
 ![](assets/IMG/results_scatter.png)
@@ -62,15 +62,13 @@ Table 1 shows the RMSE of all the models when applied to the test data. The kfol
 
 
 ## Discussion
-Althought the LR model had a lower RMSE, the RF model appeared to better be able estimate target values when groundwater heads were very low (e.g. Feb 7-9) or high (e.g. Feb 19-22) (Figure 4).
+Althought the LR model has a lower RMSE that the RF, the RF model appears to better be able estimate target values when groundwater heads were very low (e.g. Feb 7-9) or high (e.g. Feb 19-22), although both models perform worse during these conditions (Figure 2,3). However, both models perform worst under at these points. Overall, the ensemble average method resulted in the lowest RMSE. This shows the benefits of this approach, as the combination of the comparitively weak RF predictor with the LR model improves overall performance.
+
+The distribution of the ensemble average residuals being skewed to the right suggested that the of the data is underestimated, with a smaller proportion of larger overestimates. This warrants further investigation to ensure the model is not missing any key relationships. Still, the mean of the residuals is very close to zero, suggesting appropriate model fitting.
 
 ## Conclusion
 
-Here is a brief summary. From this work, the following conclusions can be made:
-* first conclusion
-* second conclusion
-
-Here is how this work could be developed further in a future project.
+Overall, the ensemble average model does a good job at predicting groundwater levels, with RMSEs consistant with or below those typical of complex numerical simulations of beach groundwater head. This provides valuable data. This type of predictive model provides a much needed tool for assessment of shallow beach groundwater hazards, especially in the absense of in-depth geological data or computational resources needed to run numerical simulations. Such models have the potential to make assessment of periodic shallow groundwater hazards more accessible. Future work coud include development of an autoregressive model with exogenous inputs to more directly explore the groundwater head time series (as opposed to individual measurements). Machine learning techniques could also be used to try and develop parameterizations of offshore wave conditions' influences on beach groundwater, as these relationships are not yet understood on wave dominant coastlines such as the U.S. West Coast.
 
 ## References
 [1] DALL-E 3
