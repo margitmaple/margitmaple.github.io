@@ -35,6 +35,8 @@ In addition to the variables discussed in the previous section, an additional va
 A linear regression with ridge regularization is implemente using the Ridge function in the SciKitLearn toolbox. This is ment as a first approach to capture any linear relationships in the time series. Ridge regularization is used in order to combat overfitting. Many of the features added as past values of the original variables may not have a strong correlation to the target, as only those features within the timeframe where the forcing has propogated to the measurement location will influence it strongly. Therefore, including a regularization term is crucial for minimizing 
 the parameter weights.
 
+Ridge regularization implements a cost function that minimizes the square error and the L2 norm. The alpha coefficient determines how heavily weighted the L2 norm is in the cost function. 
+
 
 Here are some more details about the machine learning approach, and why this was deemed appropriate for the dataset. 
 
