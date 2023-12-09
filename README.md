@@ -1,5 +1,5 @@
 ## Overview
-In order to predict beach groundwater hydraulic head, an ensemble machine learning approach is appplied using linear regression with ridge regularization, random forrest decision trees, and artificial neural networks. 
+In order to predict beach groundwater hydraulic head, an ensemble machine learning approach is appplied using linear regression with ridge regularization and random forrest decision trees. 
 
 ***
 
@@ -28,23 +28,24 @@ The groundwater head measured at a pressure sensor buried 30m inland from the sh
 
 ## Modelling
 ### Feature and Model Selection
-In addition to the variables discussed in the previous section, an additional variable calculated as $H_{so}^{1/2}*Tp$ is also included. This value is often used in parameterizations of wave runup on beaches and therefore may play an important role. Additionally, groundwater response lags behind ocean conditions increasingly as you move inland. Analysis of the measured groundwater head found that the water tables at this location typically peaked around 4 hours after the high tide. In order to capture these delayed effects, values of input variable up to 6 hours (12 timesteps) earlier are added as their own feature (except for t). The first 12 data points are therefore removed from the dataset. In total, this lead to a feature set of length $(7 * 13+1) = 96$ features and m = 1284 samples. An ensemble approach using supermized methods is taken by applying linear regression with ridge regularization, decision tress within a random forest regressor, and an artificial neural network. This is done in order to effectively capture both linear and non-linear relationships in the time series. Ensemble approaches also help min For all models, 70% of the samples are used as the training dataset, and 30% are used as the test data set.
+In addition to the variables discussed in the previous section, an additional variable calculated as $H_{so}^{1/2}*Tp$ is also included. This value is often used in parameterizations of wave runup on beaches and therefore may play an important role. Additionally, groundwater response lags behind ocean conditions increasingly as you move inland. Analysis of the measured groundwater head found that the water tables at this location typically peaked around 4 hours after the high tide. In order to capture these delayed effects, values of input variable up to 6 hours (12 timesteps) earlier are added as their own feature (except for t). The first 12 data points are therefore removed from the dataset. In total, this lead to a feature set of length $(7 * 13+1) = 96$ features and m = 1284 samples. An ensemble approach using supermized methods is taken by applying linear regression with ridge regularization and decision tress within a random forest regressor. This is done in order to effectively capture both linear and non-linear relationships in the time series. Ensemble approaches also help min For all models, 70% of the samples are used as the training dataset, and 30% are used as the test data set.
 
 ### Linear Regression with Ridge Regularization
-A linear regression with ridge regularization is implemented using the Ridge function in the SciKitLearn toolbox. This is ment as a first approach to capture any linear relationships in the time series. Ridge regularization is used in order to combat overfitting. Many of the features added as past values of the original variables may not have a strong correlation to the target, as only those features within the timeframe where the forcing has propogated to the measurement location will influence it strongly. Therefore, including a regularization term is crucial for minimizing 
-the parameter weights. 
+A supervised linear regression with ridge regularization is implemented using the Ridge function in the SciKitLearn toolbox. This is ment as a first approach to capture any linear relationships in the time series. Ridge regularization is used in order to combat overfitting. Many of the features added as past values of the original variables may not have a strong correlation to the target, as only those features within the timeframe where the forcing has propogated to the measurement location will influence it strongly. Therefore, including a regularization term is crucial for minimizing the parameter weights. 
 
 Ridge regularization implements a cost function that minimizes the square error and the L2 norm. The alpha coefficient determines how heavily weighted the L2 norm is in the cost function. Alpha values ranging from 1 to 20 are tested, with alpha = 10 being selected as it results in the lowest RMSE in the test dataset (Figure 2). With this alpha value, the RMSE is 0.1582 m. The kfolds cross-validation technique was also implemented. The number of folds was tested from 2 to 30. The overall test RMSE tended to decrease until 9 folds, after which it leveled out (Figure 2). With lower fold numbers, a larger portion of the dataset is used as the hold-out. With our relatively small dataset, the decrease in in samples due to the hold-out appears to be more detrimental to model performance than the improvements associated cross-validation.
-
-With an alpha value of 10 and cross-validation using 9 folds, the linear regression model with ridge regularization has a RMSE of 0.1567m when applied to the test data.
 
 ![](assets/IMG/RR_alpha_kf.png)
 *Figure 2: Linear regression with ridge regularization, RMSE with respect to alpha.*
 
 ## Random Forrest Regressor
-A random forrest model consisting of decision trees is applied next using the RandomForestRegressor function in the SciKitLearn toolbox. Decision trees for regression estimate target values by progressively splitting data into groups decreasing in size. In this model, the squared error cost function was used to determine the best split. 
+A supervised random forrest model consisting of decision trees is applied next using the RandomForestRegressor function in the SciKitLearn toolbox. Decision trees for regression estimate target values by progressively splitting data into groups decreasing in size. In this model, the squared error cost function was used to determine the best split. The random forrest model fits many decision trees, and combines the results to produce a final output. The input data used in each decision tree is is varied using bootstrapping, in which a random sample is taken from the original dataset with replacement.
+
+Decision trees are very quick to train and do not require parameter fitting, but they can be prone to overfitting. In order to address this, the maximum depth of the decision tree (largest path from root to leaf) was limited to 8. Using smaller maximum depths resulted in comperable RMSEs, but qualitatively it could be seen that the oscillations in the groundwater head were not captured. The maximum number of features to consider when looking for the best split was also limited to 10, with the goal of ignoring the lagged features with minimal correlations to the target values. The number of decision tree estimators in the random forrest was systematically increased until the RMSE of estimated test data reached a semi-constant value. The final random forest model consisted of 50 decision trees.
 
 ## Results
+With an alpha value of 10 and cross-validation using 9 folds, the linear regression model with ridge regularization has a RMSE of 0.1567m when applied to the test data.
+
 
 Figure X shows... [description of Figure X].
 
