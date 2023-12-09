@@ -1,5 +1,7 @@
 ## Overview
 In order to predict beach groundwater hydraulic head, an ensemble machine learning approach is applied using linear regression with ridge regularization and random forest decision trees. 
+Code: https://colab.research.google.com/drive/1-W39cEclC6vo4g_f-Tc1qZ7Men1iBMvZ?usp=sharing
+Data: 
 
 ***
 
@@ -15,7 +17,7 @@ Input data features selected for this project are offshore water level (WL), dee
 
 Beach topography is taken from an ATV survey conducted February 18th, 2015. Foreshore beach slope varies as water levels move up and down the beach with tides and waves, as the beach face is convex. Therefore, an empirical parameterization of mean water level and wave runup presented by Stockdon et al., 2006 [10] is used to determine the range over which the foreshore beach slope is calculated:
 
-![](assets/IMG/eqn.png)
+![](assets/IMG/eqn2.png)
 
 The groundwater head measured at a pressure sensor buried 30m inland from the shoreline is taken to be the target data. All input and target data are interpolated to match the lowest sample rate of 30 minutes in the CDIP data, and normalized to range from 0 to 1.
 
