@@ -2,7 +2,7 @@
 In order to predict beach groundwater hydraulic head, an ensemble machine learning approach is applied using linear regression with ridge regularization and random forest decision trees. 
 ***
 ## Links
-Code: https://colab.research.google.com/drive/1-W39cEclC6vo4g_f-Tc1qZ7Men1iBMvZ?usp=sharing
+Code: https://colab.research.google.com/drive/1dlk3SE7zYaYOlahEPSb_FWe1lZSBwSi-?usp=sharing
 
 Data: https://drive.google.com/drive/folders/1s9moHgI5mlNNIf35P_yqRgZ-jTYVy5sY?usp=sharing
 
