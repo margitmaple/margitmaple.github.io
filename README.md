@@ -28,10 +28,10 @@ The groundwater head measured at a pressure sensor buried 30m inland from the sh
 
 ## Modelling
 ### Feature and Model Selection
-In addition to the variables discussed in the previous section, an additional variable calculated as $H_{so}^{1/2}*Tp$ is also included. This value is often used in parameterizations of wave runup on beaches and therefore may play an important role. Additionally, groundwater response lags behind ocean conditions increasingly as you move inland. Analysis of the measured groundwater head found that the water tables at this location typically peaked around 4 hours after the high tide. In order to capture these delayed effects, values of input variable up to 6 hours (12 timesteps) earlier are added as their own feature (except for t). The first 12 data points are therefore removed from the dataset. In total, this lead to a feature set of length $(7 * 13+1) = 96$ features and m = 1284 samples. An ensemble approach using supermized methods is taken by applying linear regression with ridge regularization, decision tress within a random forest regressor, and an artificial neural network. This is done in order to effectively capture both linear and non-linear relationships in the time series. For all models, 70% of the samples are used as the training dataset, and 30% are used as the test data set.
+In addition to the variables discussed in the previous section, an additional variable calculated as $H_{so}^{1/2}*Tp$ is also included. This value is often used in parameterizations of wave runup on beaches and therefore may play an important role. Additionally, groundwater response lags behind ocean conditions increasingly as you move inland. Analysis of the measured groundwater head found that the water tables at this location typically peaked around 4 hours after the high tide. In order to capture these delayed effects, values of input variable up to 6 hours (12 timesteps) earlier are added as their own feature (except for t). The first 12 data points are therefore removed from the dataset. In total, this lead to a feature set of length $(7 * 13+1) = 96$ features and m = 1284 samples. An ensemble approach using supermized methods is taken by applying linear regression with ridge regularization, decision tress within a random forest regressor, and an artificial neural network. This is done in order to effectively capture both linear and non-linear relationships in the time series. Ensemble approaches also help min For all models, 70% of the samples are used as the training dataset, and 30% are used as the test data set.
 
-### Linear Regression with ridge regularization
-A linear regression with ridge regularization is implemente using the Ridge function in the SciKitLearn toolbox. This is ment as a first approach to capture any linear relationships in the time series. Ridge regularization is used in order to combat overfitting. Many of the features added as past values of the original variables may not have a strong correlation to the target, as only those features within the timeframe where the forcing has propogated to the measurement location will influence it strongly. Therefore, including a regularization term is crucial for minimizing 
+### Linear Regression with Ridge Regularization
+A linear regression with ridge regularization is implemented using the Ridge function in the SciKitLearn toolbox. This is ment as a first approach to capture any linear relationships in the time series. Ridge regularization is used in order to combat overfitting. Many of the features added as past values of the original variables may not have a strong correlation to the target, as only those features within the timeframe where the forcing has propogated to the measurement location will influence it strongly. Therefore, including a regularization term is crucial for minimizing 
 the parameter weights. 
 
 Ridge regularization implements a cost function that minimizes the square error and the L2 norm. The alpha coefficient determines how heavily weighted the L2 norm is in the cost function. Alpha values ranging from 1 to 20 are tested, with alpha = 10 being selected as it results in the lowest RMSE in the test dataset (Figure 2). With this alpha value, the RMSE is 0.1582 m. The kfolds cross-validation technique was also implemented. The number of folds was tested from 2 to 30. The overall test RMSE tended to decrease until 9 folds, after which it leveled out (Figure 2). With lower fold numbers, a larger portion of the dataset is used as the hold-out. With our relatively small dataset, the decrease in in samples due to the hold-out appears to be more detrimental to model performance than the improvements associated cross-validation.
@@ -41,21 +41,8 @@ With an alpha value of 10 and cross-validation using 9 folds, the linear regress
 ![](assets/IMG/RR_alpha_kf.png)
 *Figure 2: Linear regression with ridge regularization, RMSE with respect to alpha.*
 
-
-Here are some more details about the machine learning approach, and why this was deemed appropriate for the dataset. 
-
-The model might involve optimizing some quantity. You can include snippets of code if it is helpful to explain things.
-
-```python
-from sklearn.ensemble import ExtraTreesClassifier
-from sklearn.datasets import make_classification
-X, y = make_classification(n_features=4, random_state=0)
-clf = ExtraTreesClassifier(n_estimators=100, random_state=0)
-clf.fit(X, y)
-clf.predict([[0, 0, 0, 0]])
-```
-
-This is how the method was developed.
+## Random Forrest Regressor
+A random forrest model consisting of decision trees is applied next using the RandomForestRegressor function in the SciKitLearn toolbox. Decision trees for regression estimate target values by progressively splitting data into groups decreasing in size. In this model, the squared error cost function was used to determine the best split. 
 
 ## Results
 
