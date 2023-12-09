@@ -23,7 +23,9 @@ The groundwater head measured at a pressure sensor buried 30m inland from the sh
 
 ![](assets/IMG/DataIn.png){: width="800" }
 
-*Figure 1: Here is a caption for my diagram. This one shows a pengiun [1].*
+*Figure 1: Input and target data collected at Imperial beach in February 2015.*
+
+
 
 ## Modelling
 
