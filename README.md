@@ -19,9 +19,9 @@ $`bound = 1.1\bigg(0.35b(H_{S0}L_0)^{\frac{1}{2}}\pm\dfrac{[H_{S0}L_0(0.563b^2+0
 
 $`b=\dfrac{y(bound_{upper}) - y(bound_{lower})}{x_(bound{upper}) - x(bound_{lower})}`$
 
-The groundwater head measured at the pressure sensor shown in Figure XXX is taken to be the target data. All input and targer data is interpolated to match the lowest sample rate of 30 minutes in the CDIP data, and normalized to range from 0 to 1.
+The groundwater head measured at a pressure sensor buried 30m inland from the shoreline is taken to be the target data. All input and target data is interpolated to match the lowest sample rate of 30 minutes in the CDIP data, and normalized to range from 0 to 1.
 
-![](assets/IMG/datapenguin.png){: width="500" }
+![](assets/IMG/DataIn.png){: width="800" }
 
 *Figure 1: Here is a caption for my diagram. This one shows a pengiun [1].*
 
