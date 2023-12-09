@@ -1,9 +1,10 @@
 ## Overview
 In order to predict beach groundwater hydraulic head, an ensemble machine learning approach is applied using linear regression with ridge regularization and random forest decision trees. 
-Code: https://colab.research.google.com/drive/1-W39cEclC6vo4g_f-Tc1qZ7Men1iBMvZ?usp=sharing
-Data: https://drive.google.com/drive/folders/1s9moHgI5mlNNIf35P_yqRgZ-jTYVy5sY?usp=sharing
-
 ***
+## Links
+Code: https://colab.research.google.com/drive/1-W39cEclC6vo4g_f-Tc1qZ7Men1iBMvZ?usp=sharing
+
+Data: https://drive.google.com/drive/folders/1s9moHgI5mlNNIf35P_yqRgZ-jTYVy5sY?usp=sharing
 
 ## Introduction 
 Coastal aquifers are highly dynamic groundwater systems which are influenced by coastal water levels.  Sea level fluctuations such as tides, storm surge and wave impacts propagate inland, causing the water table of adjacent unconfined aquifers (i.e., beach groundwater) to oscillate over the first hundred or so meters inland from their interface [1,2]. Being able to characterize these fluctuations is crucial, as shallow coastal groundwater levels may result in a number of challenges including groundwater emergence and flooding [3], subsurface infrastructure damage [4], and increased liquefaction risk in seismically active regions [5]. 
