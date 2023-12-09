@@ -4,4 +4,3 @@ logo: /assets/IMG/template_logo.png
 show_downloads: true
 theme: jekyll-theme-cayman
 markdown: kramdown
-layout: default
