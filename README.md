@@ -15,7 +15,7 @@ Input data features selected for this project are time (t), offshore water level
 
 Beach topography is taken from an ATV survey conducted February 18th, 2015. Foreshore beach slope varies as water levels move up and down the beach with tides and waves, as the beach face is convex. Therefore, an emperical parameterization of mean water level and wave runup presented by Stockdon et al., 2006 is used to determine the region over which the foreshore beach slope is recorded:
 
-$`bound = 1.1\bigg(0.35b(H_{S0}L_0)^{\frac{1}{2}}\pm\dfrac{[H_{S0}L_0(0.563b^2+0.004)]^{\frac{1}{2}}}{2}\bigg) + WL`$
+\\(bound = 1.1\bigg(0.35b(H_{S0}L_0)^{\frac{1}{2}}\pm\dfrac{[H_{S0}L_0(0.563b^2+0.004)]^{\frac{1}{2}}}{2}\bigg) + WL\\)
 
 $`b=\dfrac{y(bound_{upper}) - y(bound_{lower})}{x_(bound{upper}) - x(bound_{lower})}`$
 
